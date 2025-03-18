@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encryptor</title>
+
+    <!-- Updated favicon link -->
+    <link rel="icon" href="https://avatars.githubusercontent.com/u/151978475?v=4" type="image/png">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.js"></script>
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            overflow: auto;
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 5px;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px #ff0000, 0 0 10px #ff0000, 0 0 15px #ff0000, 0 0 20px #ff0000;
+            }
+            100% {
+                text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 20px #00ff00;
+            }
+        }
+
+        .background-text {
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.1);
+            position: fixed;
+            z-index: -1;
+            white-space: nowrap;
+            user-select: none;
+            animation: fade 3s infinite alternate;
+        }
+
+        .background-text-left {
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        }
+
+        .background-text-right {
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%) rotate(90deg);
+        }
+
+        @keyframes fade {
+            0% {
+                opacity: 0.1;
+            }
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        .container {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        label, select, input, textarea, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #ff6347;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #ff4500;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .output-container {
+            max-height: 200px;
+            overflow-y: auto;
+            background: #222;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Encrypto V2</h1>
+<p class="subtitle">Made by CameronCodesStuff</p>
+
+<!-- Background text "CameronCodesStuff" with fade-in and fade-out effect -->
+<div class="background-text background-text-left">CameronCodesStuff</div>
+<div class="background-text background-text-right">CameronCodesStuff</div>
+
+<div class="container">
+    <label for="encryptOrDecrypt">Choose Action:</label>
+    <select id="encryptOrDecrypt">
+        <option value="encrypt">Encrypt</option>
+        <option value="decrypt">Decrypt</option>
+    </select>
+
+    <label for="textInput">Enter text to encrypt or decrypt:</label>
+    <textarea id="textInput" rows="4"></textarea>
+
+    <label for="password">Enter Password:</label>
+    <input type="password" id="password">
+
+    <button onclick="processData()">Process</button>
+
+    <div id="outputSection" class="hidden">
+        <label>Processed Text:</label>
+        <div id="processedText" class="output-container"></div>
+        <button onclick="copyToClipboard()">Copy to Clipboard</button>
+    </div>
+</div>
+
+<script>
+function processData() {
+    const action = document.getElementById('encryptOrDecrypt').value;
+    const password = document.getElementById('password').value;
+    const textInput = document.getElementById('textInput').value;
+    
+    if (!password || !textInput) {
+        alert("Please enter both text and a password!");
+        return;
+    }
+
+    let processedData;
+    if (action === 'encrypt') {
+        processedData = CryptoJS.AES.encrypt(textInput, password).toString();
+    } else {
+        try {
+            processedData = CryptoJS.AES.decrypt(textInput, password).toString(CryptoJS.enc.Utf8);
+            if (!processedData) throw new Error("Decryption failed");
+        } catch (error) {
+            alert("Invalid password or corrupted text!");
+            return;
+        }
+    }
+
+    const processedTextElement = document.getElementById('processedText');
+    processedTextElement.innerText = processedData;
+    processedTextElement.classList.remove('hidden');
+    processedTextElement.scrollTop = processedTextElement.scrollHeight;
+    document.getElementById('outputSection').classList.remove('hidden');
+}
+
+function copyToClipboard() {
+    navigator.clipboard.writeText(document.getElementById('processedText').innerText).then(() => {
+        alert("Copied to clipboard!");
+    });
+}
+</script>
+
+</body>
+</html>
