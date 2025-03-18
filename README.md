@@ -1,17 +1,11 @@
-# 🔐 EncryptoV2 - The Ultimate Text Encryptor & Code Editor 📝
-
-Welcome to **EncryptoV2** – your all-in-one **text encryptor**, **code editor**, and **so much more**! 🚀
+# 🔐 EncryptoV2 - The Ultimate Text Encryptor 🔐
+Welcome to **EncryptoV2** – your all-in-one **text encryptor**. 🚀
 
 ## 🎯 Features
 
 ✅ **Advanced Text Encryption** - Secure your text with powerful encryption methods 🔒
-✅ **Built-in Code Editor** - Write and edit code with syntax highlighting 💻
-✅ **Multi-Language Support** - Supports various programming languages 🌎
 ✅ **User-Friendly UI** - A sleek and modern interface for smooth usability 🎨
 ✅ **Fast & Efficient** - Optimized for speed and performance ⚡
-✅ **Save & Load Files** - Easily manage your encrypted and coded files 📂
-✅ **Dark & Light Mode** - Switch themes to match your vibe 🌗
-
 ## 📦 Installation
 
 1️⃣ Clone the repo:
@@ -33,10 +27,9 @@ Welcome to **EncryptoV2** – your all-in-one **text encryptor**, **code editor*
 
 ## 🚀 Usage
 
-- Open the app and start **coding** or **encrypting text** right away! 🛠️
+- Open the app and start **encrypting text** right away! 🛠️
 - Choose encryption settings and secure your text easily 🔏
 - Save encrypted files and decrypt them later 🔓
-- Use the editor for smooth, distraction-free coding 🖊️
 
 ## 🤝 Contributing
 
